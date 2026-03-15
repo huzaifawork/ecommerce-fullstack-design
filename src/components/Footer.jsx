@@ -70,7 +70,7 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-2">
           <p className="text-xs text-gray-500">© 2023 Ecommerce.</p>
           <div className="flex items-center gap-1 text-xs text-gray-500 cursor-pointer hover:text-blue-600">
-            <span className="text-base">🇬🇧</span> English <span className="ml-1">▲</span>
+            <img src="https://flagcdn.com/w20/gb.png" alt="GB" className="w-4 h-3" /> English <span className="ml-1">▲</span>
           </div>
         </div>
       </div>

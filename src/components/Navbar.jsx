@@ -78,10 +78,10 @@ export default function Navbar() {
           </div>
           <div className="ml-auto flex items-center gap-4 text-gray-600 text-xs">
             <span className="flex items-center gap-1 cursor-pointer hover:text-blue-600">
-              <span className="text-base">🇺🇸</span> English, USD <ChevronDown size={12} />
+              <img src="https://flagcdn.com/w20/us.png" alt="US" className="w-4 h-3" /> English, USD <ChevronDown size={12} />
             </span>
             <span className="flex items-center gap-1 cursor-pointer hover:text-blue-600">
-              Ship to <span className="text-base">🇩🇪</span> <ChevronDown size={12} />
+              Ship to <img src="https://flagcdn.com/w20/de.png" alt="DE" className="w-4 h-3" /> <ChevronDown size={12} />
             </span>
           </div>
         </div>

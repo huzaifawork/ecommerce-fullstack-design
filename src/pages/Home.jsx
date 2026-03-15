@@ -55,16 +55,16 @@ const services = [
 ]
 
 const regions = [
-  { country: 'Arabic Emirates', flag: '🇦🇪', domain: 'shopname.ae' },
-  { country: 'Australia', flag: '🇦🇺', domain: 'shopname.au' },
-  { country: 'United States', flag: '🇺🇸', domain: 'shopname.us' },
-  { country: 'Russia', flag: '🇷🇺', domain: 'shopname.ru' },
-  { country: 'Italy', flag: '🇮🇹', domain: 'shopname.it' },
-  { country: 'Denmark', flag: '🇩🇰', domain: 'denmark.com.dk' },
-  { country: 'France', flag: '🇫🇷', domain: 'shopname.com.fr' },
-  { country: 'Arabic Emirates', flag: '🇦🇪', domain: 'shopname.ae' },
-  { country: 'China', flag: '🇨🇳', domain: 'shopname.cn' },
-  { country: 'Great Britain', flag: '🇬🇧', domain: 'shopname.co.uk' },
+  { country: 'Arabic Emirates', code: 'AE', domain: 'shopname.ae' },
+  { country: 'Australia', code: 'AU', domain: 'shopname.au' },
+  { country: 'United States', code: 'US', domain: 'shopname.us' },
+  { country: 'Russia', code: 'RU', domain: 'shopname.ru' },
+  { country: 'Italy', code: 'IT', domain: 'shopname.it' },
+  { country: 'Denmark', code: 'DK', domain: 'denmark.com.dk' },
+  { country: 'France', code: 'FR', domain: 'shopname.com.fr' },
+  { country: 'Arabic Emirates', code: 'AE', domain: 'shopname.ae' },
+  { country: 'China', code: 'CN', domain: 'shopname.cn' },
+  { country: 'Great Britain', code: 'GB', domain: 'shopname.co.uk' },
 ]
 
 function CountdownTimer() {
@@ -279,7 +279,11 @@ export default function Home() {
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
             {regions.map((r, i) => (
               <Link to="#" key={i} className="flex items-center gap-2 p-2 border border-gray-100 rounded hover:border-blue-300 transition-colors">
-                <span className="text-2xl">{r.flag}</span>
+                <img 
+                  src={`https://flagcdn.com/w40/${r.code.toLowerCase()}.png`} 
+                  alt={r.country}
+                  className="w-6 h-4 object-cover rounded"
+                />
                 <div>
                   <p className="text-xs font-medium text-gray-700">{r.country}</p>
                   <p className="text-xs text-gray-400">{r.domain}</p>
