@@ -1,30 +1,41 @@
 # ecommerce-fullstack-design
 
-Full-stack e-commerce monorepo using npm workspaces.
+Full-stack e-commerce app — React frontend + Express backend in a single unified repo.
 
 ## Structure
 
 ```
 ecommerce-fullstack-design/
-├── package.json          # Root — npm workspaces
-├── frontend/             # @ecommerce/frontend (React + Vite + TailwindCSS)
-└── backend/              # @ecommerce/backend (Express.js)
+├── src/                  # React frontend
+│   ├── components/       # Navbar, Footer, ProductCard
+│   ├── pages/            # Home, ProductListing, ProductDetails, Cart
+│   ├── data/             # Mock product data
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── index.css
+├── server/               # Express backend
+│   └── index.js
+├── public/               # Static assets
+├── index.html
+├── vite.config.js
+├── package.json          # Single package.json for everything
+└── .env
 ```
 
-## Install all dependencies
+## Install
 
 ```bash
-npm install
+npm install --legacy-peer-deps
 ```
 
-## Run both apps concurrently
+## Run
 
 ```bash
-# Frontend only → http://localhost:5173
-npm run dev:frontend
+# React dev server → http://localhost:5173
+npm run dev
 
-# Backend only → http://localhost:5000
-npm run dev:backend
+# Express server → http://localhost:5000
+npm run dev:server
 ```
 
 ## Build
