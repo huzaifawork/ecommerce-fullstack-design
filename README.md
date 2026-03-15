@@ -1,33 +1,34 @@
 # ecommerce-fullstack-design
 
-Full-stack e-commerce application built with React + Vite (frontend) and Express.js (backend).
+Full-stack e-commerce monorepo using npm workspaces.
 
-## Project Structure
+## Structure
 
 ```
 ecommerce-fullstack-design/
-├── frontend/   # React + Vite + TailwindCSS
-└── backend/    # Express.js REST API
+├── package.json          # Root — npm workspaces
+├── frontend/             # @ecommerce/frontend (React + Vite + TailwindCSS)
+└── backend/              # @ecommerce/backend (Express.js)
 ```
 
-## Getting Started
+## Install all dependencies
 
-### Frontend
 ```bash
-cd frontend
 npm install
-npm run dev       # http://localhost:5173
 ```
 
-### Backend
+## Run both apps concurrently
+
 ```bash
-cd backend
-npm install
-npm run dev       # http://localhost:5000
+# Frontend only → http://localhost:5173
+npm run dev:frontend
+
+# Backend only → http://localhost:5000
+npm run dev:backend
 ```
 
-## Pages
-- `/` — Home Page
-- `/products` — Product Listing (filter, sort, search)
-- `/products/:id` — Product Details
-- `/cart` — Shopping Cart
+## Build
+
+```bash
+npm run build
+```
