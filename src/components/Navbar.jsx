@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ShoppingCart, MessageSquare, Package, User, ChevronDown, Menu, X, Search } from 'lucide-react'
+import { ShoppingCart, MessageSquare, Package, User, ChevronDown, Menu, X, Search, Heart } from 'lucide-react'
 
 const navLinks = ['Hot offers', 'Gift boxes', 'Projects', 'Menu item']
 
@@ -15,7 +15,9 @@ export default function Navbar() {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-1.5 mr-4 shrink-0">
             <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center">
-              <span className="text-white text-xs font-bold">B</span>
+              <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+              </svg>
             </div>
             <span className="font-semibold text-gray-800 text-lg">Brand</span>
           </Link>
@@ -33,8 +35,8 @@ export default function Navbar() {
               <option>Clothing</option>
               <option>Home</option>
             </select>
-            <button className="bg-blue-600 text-white px-4 text-sm font-medium hover:bg-blue-700 transition-colors flex items-center gap-1">
-              <Search size={14} /> Search
+            <button className="bg-blue-600 text-white px-4 text-sm font-medium hover:bg-blue-700 transition-colors flex items-center gap-1.5">
+              <Search size={16} /> Search
             </button>
           </div>
 
@@ -75,8 +77,12 @@ export default function Navbar() {
             Help <ChevronDown size={14} />
           </div>
           <div className="ml-auto flex items-center gap-4 text-gray-600 text-xs">
-            <span className="flex items-center gap-1 cursor-pointer hover:text-blue-600">English, USD <ChevronDown size={12} /></span>
-            <span className="flex items-center gap-1 cursor-pointer hover:text-blue-600">Ship to 🇩🇪 <ChevronDown size={12} /></span>
+            <span className="flex items-center gap-1 cursor-pointer hover:text-blue-600">
+              <span className="text-base">🇺🇸</span> English, USD <ChevronDown size={12} />
+            </span>
+            <span className="flex items-center gap-1 cursor-pointer hover:text-blue-600">
+              Ship to <span className="text-base">🇩🇪</span> <ChevronDown size={12} />
+            </span>
           </div>
         </div>
       </div>

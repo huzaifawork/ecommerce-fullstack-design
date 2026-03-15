@@ -48,10 +48,10 @@ const recommendedItems = [
 ]
 
 const services = [
-  { label: 'Source from Industry Hubs', icon: '🔍', img: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=200&h=120&fit=crop' },
+  { label: 'Source from Industry Hubs', icon: '📦', img: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=200&h=120&fit=crop' },
   { label: 'Customize Your Products', icon: '📋', img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&h=120&fit=crop' },
   { label: 'Fast, reliable shipping by ocean or air', icon: '✈️', img: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=200&h=120&fit=crop' },
-  { label: 'Product monitoring and inspection', icon: '🌐', img: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=200&h=120&fit=crop' },
+  { label: 'Product monitoring and inspection', icon: '✅', img: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=200&h=120&fit=crop' },
 ]
 
 const regions = [
@@ -259,8 +259,8 @@ export default function Home() {
             {services.map((s, i) => (
               <div key={i} className="relative rounded overflow-hidden group cursor-pointer">
                 <img src={s.img} alt={s.label} className="w-full h-28 object-cover group-hover:scale-105 transition-transform duration-300" />
-                <div className="absolute inset-0 bg-black/30 flex flex-col justify-end p-2">
-                  <span className="bg-white/90 rounded-full w-7 h-7 flex items-center justify-center text-sm mb-1">{s.icon}</span>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-3">
+                  <span className="bg-white rounded-full w-8 h-8 flex items-center justify-center text-lg mb-1.5">{s.icon}</span>
                   <p className="text-white text-xs font-medium leading-tight">{s.label}</p>
                 </div>
               </div>
@@ -279,7 +279,7 @@ export default function Home() {
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
             {regions.map((r, i) => (
               <Link to="#" key={i} className="flex items-center gap-2 p-2 border border-gray-100 rounded hover:border-blue-300 transition-colors">
-                <span className="text-xl">{r.flag}</span>
+                <span className="text-2xl">{r.flag}</span>
                 <div>
                   <p className="text-xs font-medium text-gray-700">{r.country}</p>
                   <p className="text-xs text-gray-400">{r.domain}</p>
@@ -296,7 +296,10 @@ export default function Home() {
           <h3 className="font-semibold text-gray-800">Subscribe on our newsletter</h3>
           <p className="text-xs text-gray-500 mt-1 mb-4">Get daily news on upcoming offers from many suppliers all over the world</p>
           <div className="flex justify-center gap-2 max-w-sm mx-auto">
-            <input type="email" placeholder="✉ Email" className="flex-1 border border-gray-300 rounded px-3 py-2 text-sm outline-none focus:ring-1 focus:ring-blue-400" />
+            <div className="relative flex-1">
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">✉</span>
+              <input type="email" placeholder="Email" className="w-full border border-gray-300 rounded px-3 py-2 pl-8 text-sm outline-none focus:ring-1 focus:ring-blue-400" />
+            </div>
             <button className="bg-blue-600 text-white px-4 py-2 rounded text-sm font-medium hover:bg-blue-700 transition-colors">Subscribe</button>
           </div>
         </div>
