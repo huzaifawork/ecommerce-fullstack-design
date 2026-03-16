@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ShoppingCart, User, ChevronDown, Menu, X, Search } from 'lucide-react'
+import MobileMenu from './MobileMenu'
 
 const navLinks = ['Hot offers', 'Gift boxes', 'Projects', 'Menu item']
 
@@ -9,6 +10,9 @@ export default function Navbar() {
 
   return (
     <header className="w-full bg-white sticky top-0 z-50">
+      {/* Mobile Menu */}
+      <MobileMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
+      
       {/* Mobile Header */}
       <div className="md:hidden">
         <div className="flex items-center justify-between px-4 h-14 border-b border-gray-200">
@@ -94,7 +98,7 @@ export default function Navbar() {
             <Link to="#" className="flex flex-col items-center hover:text-blue-600 gap-0.5">
               <User size={20} /><span>Profile</span>
             </Link>
-            <Link to="#" className="flex flex-col items-center hover:text-blue-600 gap-0.5">
+            <Link to="/cart" className="flex flex-col items-center hover:text-blue-600 gap-0.5">
               <ShoppingCart size={20} /><span>My cart</span>
             </Link>
           </div>
@@ -119,27 +123,6 @@ export default function Navbar() {
           </div>
         </div>
       </div>
-
-      {/* Mobile Menu Overlay */}
-      {menuOpen && (
-        <div className="fixed inset-0 bg-black/50 z-40 md:hidden" onClick={() => setMenuOpen(false)}>
-          <div className="bg-white w-64 h-full p-4 overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-            <div className="flex items-center justify-between mb-6">
-              <span className="font-semibold text-gray-800">Menu</span>
-              <button onClick={() => setMenuOpen(false)}>
-                <X size={20} />
-              </button>
-            </div>
-            <div className="flex flex-col gap-3">
-              {['All category', ...navLinks, 'Help'].map((link) => (
-                <Link key={link} to="#" className="text-gray-700 hover:text-blue-600 text-sm" onClick={() => setMenuOpen(false)}>
-                  {link}
-                </Link>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
     </header>
   )
 }
