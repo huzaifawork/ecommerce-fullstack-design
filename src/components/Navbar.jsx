@@ -103,11 +103,11 @@ export default function Navbar() {
         {/* Desktop Bottom Nav */}
         <div className="max-w-7xl mx-auto px-4 flex items-center gap-6 h-10 text-sm border-t border-gray-200">
           <button className="flex items-center gap-1.5 font-medium text-gray-700 hover:text-blue-600">
-            <Menu size={16} /> All category
+            <Menu size={16} /> <Link to="/products">All category</Link>
           </button>
           <div className="w-px h-5 bg-gray-200" />
           {navLinks.map((link) => (
-            <Link key={link} to="#" className="text-gray-600 hover:text-blue-600 whitespace-nowrap">{link}</Link>
+            <Link key={link} to={link === 'All category' ? '/products' : '#'} className="text-gray-600 hover:text-blue-600 whitespace-nowrap">{link}</Link>
           ))}
           <div className="ml-auto flex items-center gap-4 text-gray-600 text-xs">
             <span className="flex items-center gap-1 cursor-pointer hover:text-blue-600">
