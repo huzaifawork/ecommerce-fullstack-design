@@ -2,15 +2,27 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ShoppingCart, User, ChevronDown, Menu, X, Search } from 'lucide-react'
 import MobileMenu from './MobileMenu'
+import { useCart } from '../context/CartContext'
+import { useSearch } from '../context/SearchContext'
 
-const navLinks = ['Hot offers', 'Gift boxes', 'Projects', 'Menu item']
+const navLinks = ['Hot offers', 'Gift boxes', 'Projects', 'Menu item', 'Help']
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [localSearch, setLocalSearch] = useState('')
+  const { getCartCount } = useCart()
+  const { handleSearch } = useSearch()
+
+  const onSearch = (e) => {
+    e.preventDefault()
+    if (localSearch.trim()) {
+      handleSearch(localSearch)
+      setLocalSearch('')
+    }
+  }
 
   return (
     <header className="w-full bg-white sticky top-0 z-50">
-      {/* Mobile Menu */}
       <MobileMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
       
       {/* Mobile Header */}
@@ -28,8 +40,13 @@ export default function Navbar() {
             <span className="font-semibold text-gray-800 text-sm">Brand</span>
           </Link>
           <div className="flex items-center gap-3">
-            <Link to="/cart" className="text-gray-600">
+            <Link to="/cart" className="text-gray-600 relative">
               <ShoppingCart size={20} />
+              {getCartCount() > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                  {getCartCount()}
+                </span>
+              )}
             </Link>
             <Link to="#" className="text-gray-600">
               <User size={20} />
@@ -39,23 +56,25 @@ export default function Navbar() {
 
         {/* Mobile Search */}
         <div className="px-4 py-3 border-b border-gray-200">
-          <div className="relative">
+          <form onSubmit={onSearch} className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
             <input
               type="text"
-              placeholder="Search"
+              placeholder="Search products..."
+              value={localSearch}
+              onChange={(e) => setLocalSearch(e.target.value)}
               className="w-full bg-gray-100 rounded-lg pl-9 pr-3 py-2 text-sm outline-none"
             />
-          </div>
+          </form>
         </div>
 
-        {/* Mobile Category Tabs - Horizontal Scroll */}
+        {/* Mobile Category Tabs */}
         <div className="overflow-x-auto scrollbar-hide border-b border-gray-200">
           <div className="flex gap-2 px-4 py-3 min-w-min">
-            {['All category', 'Gadgets', 'Clothes', 'Accessories'].map((cat) => (
+            {['All category', 'Electronics', 'Clothing', 'Footwear', 'Accessories'].map((cat) => (
               <Link
                 key={cat}
-                to="/products"
+                to={cat === 'All category' ? '/products' : `/products?category=${cat}`}
                 className="text-sm text-blue-600 whitespace-nowrap px-3 py-1 rounded-full border border-blue-300 hover:bg-blue-50"
               >
                 {cat}
@@ -77,29 +96,31 @@ export default function Navbar() {
             <span className="font-semibold text-gray-800 text-lg">Brand</span>
           </Link>
 
-          <div className="flex flex-1 max-w-2xl border border-gray-300 rounded overflow-hidden">
+          <form onSubmit={onSearch} className="flex flex-1 max-w-2xl border border-gray-300 rounded overflow-hidden">
             <input
               type="text"
-              placeholder="Search"
+              placeholder="Search products..."
+              value={localSearch}
+              onChange={(e) => setLocalSearch(e.target.value)}
               className="flex-1 px-3 py-2 text-sm outline-none"
             />
-            <select className="border-l border-gray-300 px-2 text-sm text-gray-600 bg-gray-50 outline-none">
-              <option>All category</option>
-              <option>Electronics</option>
-              <option>Clothing</option>
-              <option>Home</option>
-            </select>
-            <button className="bg-blue-600 text-white px-4 text-sm font-medium hover:bg-blue-700 transition-colors flex items-center gap-1.5">
+            <button type="submit" className="bg-blue-600 text-white px-4 text-sm font-medium hover:bg-blue-700 transition-colors flex items-center gap-1.5">
               <Search size={16} /> Search
             </button>
-          </div>
+          </form>
 
           <div className="ml-auto flex items-center gap-4 text-gray-600 text-xs shrink-0">
             <Link to="#" className="flex flex-col items-center hover:text-blue-600 gap-0.5">
               <User size={20} /><span>Profile</span>
             </Link>
-            <Link to="/cart" className="flex flex-col items-center hover:text-blue-600 gap-0.5">
-              <ShoppingCart size={20} /><span>My cart</span>
+            <Link to="/cart" className="flex flex-col items-center hover:text-blue-600 gap-0.5 relative">
+              <ShoppingCart size={20} />
+              {getCartCount() > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                  {getCartCount()}
+                </span>
+              )}
+              <span>My cart</span>
             </Link>
           </div>
         </div>

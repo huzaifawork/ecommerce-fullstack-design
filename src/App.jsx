@@ -5,6 +5,8 @@ import Home from './pages/Home'
 import ProductListing from './pages/ProductListing'
 import ProductDetails from './pages/ProductDetails'
 import Cart from './pages/Cart'
+import { CartProvider } from './context/CartContext'
+import { SearchProvider } from './context/SearchContext'
 
 function AppContent() {
   const location = useLocation()
@@ -32,7 +34,11 @@ function AppContent() {
 export default function App() {
   return (
     <BrowserRouter>
-      <AppContent />
+      <SearchProvider>
+        <CartProvider>
+          <AppContent />
+        </CartProvider>
+      </SearchProvider>
     </BrowserRouter>
   )
 }
