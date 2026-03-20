@@ -28,10 +28,10 @@ export default async function handler(req, res) {
     await connectDB();
 
     const { path } = req.query;
-    const route = path ? path.join('/') : '';
+    const route = Array.isArray(path) ? path.join('/') : (path || '');
 
     // Products routes
-    if (route.startsWith('products')) {
+    if (route.startsWith('products') || route === 'products') {
       const parts = route.split('/');
       
       if (req.method === 'GET' && parts.length === 1) {
