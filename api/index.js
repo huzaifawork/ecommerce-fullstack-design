@@ -26,10 +26,10 @@ app.use(async (req, res, next) => {
   }
 });
 
-app.use('/api/products', productRoutes);
-app.use('/api/auth', authRoutes);
+app.use('/products', productRoutes);
+app.use('/auth', authRoutes);
 
-app.get('/api', (req, res) => {
+app.get('/', (req, res) => {
   res.json({ message: 'API is running' });
 });
 
