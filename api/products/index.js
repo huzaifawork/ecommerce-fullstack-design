@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import Product from '../../server/models/Product.js';
 
 let isConnected = false;
 
@@ -22,6 +21,8 @@ export default async function handler(req, res) {
 
   try {
     await connectDB();
+
+    const { default: Product } = await import('../../server/models/Product.js');
 
     if (req.method === 'GET') {
       const { category, minPrice, maxPrice, search } = req.query;

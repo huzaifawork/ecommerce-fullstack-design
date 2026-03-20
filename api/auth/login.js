@@ -27,8 +27,8 @@ export default async function handler(req, res) {
   try {
     await connectDB();
 
-    // Dynamically import User model to avoid issues
-    const { default: User } = await import('../../../server/models/User.js');
+    // Dynamically import User model
+    const { default: User } = await import('../../server/models/User.js');
 
     const { email, password } = req.body;
 

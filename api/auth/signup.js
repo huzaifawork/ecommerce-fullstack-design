@@ -27,7 +27,7 @@ export default async function handler(req, res) {
   try {
     await connectDB();
 
-    const { default: User } = await import('../../../server/models/User.js');
+    const { default: User } = await import('../../server/models/User.js');
 
     const { name, email, password } = req.body;
 

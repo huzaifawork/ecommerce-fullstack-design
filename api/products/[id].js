@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import Product from '../../../server/models/Product.js';
 
 let isConnected = false;
 
@@ -23,6 +22,7 @@ export default async function handler(req, res) {
   try {
     await connectDB();
 
+    const { default: Product } = await import('../../server/models/Product.js');
     const { id } = req.query;
 
     if (req.method === 'GET') {
