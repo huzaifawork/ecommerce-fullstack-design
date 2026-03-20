@@ -16,9 +16,10 @@ export const getAllProducts = async (filters = {}) => {
     if (filters.search) params.append('search', filters.search)
 
     const response = await axios.get(`${API_URL}/products?${params}`)
-    return response.data
+    return Array.isArray(response.data) ? response.data : []
   } catch (error) {
-    handleError(error, 'Error fetching products')
+    console.error('Error fetching products:', error)
+    return []
   }
 }
 
