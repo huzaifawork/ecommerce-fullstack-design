@@ -4,14 +4,17 @@ import { ShoppingCart, User, ChevronDown, Menu, X, Search } from 'lucide-react'
 import MobileMenu from './MobileMenu'
 import { useCart } from '../context/CartContext'
 import { useSearch } from '../context/SearchContext'
+import { useAuth } from '../context/AuthContext'
 
 const navLinks = ['Hot offers', 'Gift boxes', 'Projects', 'Menu item', 'Help']
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [localSearch, setLocalSearch] = useState('')
+  const [showUserMenu, setShowUserMenu] = useState(false)
   const { getCartCount } = useCart()
   const { handleSearch } = useSearch()
+  const { user, logout, isAdmin } = useAuth()
 
   const onSearch = (e) => {
     e.preventDefault()
@@ -110,9 +113,62 @@ export default function Navbar() {
           </form>
 
           <div className="ml-auto flex items-center gap-4 text-gray-600 text-xs shrink-0">
-            <Link to="#" className="flex flex-col items-center hover:text-blue-600 gap-0.5">
-              <User size={20} /><span>Profile</span>
-            </Link>
+            <div className="relative">
+              <button 
+                onClick={() => setShowUserMenu(!showUserMenu)}
+                className="flex flex-col items-center hover:text-blue-600 gap-0.5"
+              >
+                <User size={20} />
+                <span>{user ? user.name.split(' ')[0] : 'Profile'}</span>
+              </button>
+              {showUserMenu && (
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
+                  {user ? (
+                    <>
+                      <div className="px-4 py-2 border-b border-gray-200">
+                        <p className="text-sm font-medium text-gray-900">{user.name}</p>
+                        <p className="text-xs text-gray-500">{user.email}</p>
+                      </div>
+                      {isAdmin() && (
+                        <Link
+                          to="/admin"
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          onClick={() => setShowUserMenu(false)}
+                        >
+                          Admin Dashboard
+                        </Link>
+                      )}
+                      <button
+                        onClick={() => {
+                          logout()
+                          setShowUserMenu(false)
+                        }}
+                        className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
+                      >
+                        Logout
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <Link
+                        to="/login"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        onClick={() => setShowUserMenu(false)}
+                      >
+                        Login
+                      </Link>
+                      <Link
+                        to="/signup"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        onClick={() => setShowUserMenu(false)}
+                      >
+                        Sign Up
+                      </Link>
+                    </>
+                  )}
+                </div>
+              )}
+            </div>
             <Link to="/cart" className="flex flex-col items-center hover:text-blue-600 gap-0.5 relative">
               <ShoppingCart size={20} />
               {getCartCount() > 0 && (
