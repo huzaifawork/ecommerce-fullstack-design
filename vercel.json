@@ -11,26 +11,8 @@
   ],
   "rewrites": [
     {
-      "source": "/api/products/:path*",
-      "destination": "/api/products"
-    },
-    {
-      "source": "/api/auth/:path*",
-      "destination": "/api/auth"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/assets/(.*)",
-      "dest": "/assets/$1"
-    },
-    {
-      "src": "/(.*\\.(js|css|png|jpg|jpeg|gif|svg|ico|json))",
-      "dest": "/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/api/:path*",
+      "destination": "/api"
     }
   ]
 }
