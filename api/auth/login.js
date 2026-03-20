@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
-import User from '../../../server/models/User.js';
 
 let isConnected = false;
 
@@ -28,6 +27,9 @@ export default async function handler(req, res) {
   try {
     await connectDB();
 
+    // Dynamically import User model to avoid issues
+    const { default: User } = await import('../../../server/models/User.js');
+
     const { email, password } = req.body;
 
     if (!email || !password) {
@@ -54,6 +56,7 @@ export default async function handler(req, res) {
       token
     });
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    console.error('Login error:', error);
+    return res.status(500).json({ message: error.message, stack: error.stack });
   }
 }
