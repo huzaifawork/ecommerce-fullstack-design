@@ -2,10 +2,6 @@
   "version": 2,
   "builds": [
     {
-      "src": "server/index.js",
-      "use": "@vercel/node"
-    },
-    {
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
@@ -13,11 +9,17 @@
       }
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "server/index.js"
+      "source": "/api/products/:path*",
+      "destination": "/api/products"
     },
+    {
+      "source": "/api/auth/:path*",
+      "destination": "/api/auth"
+    }
+  ],
+  "routes": [
     {
       "src": "/assets/(.*)",
       "dest": "/assets/$1"
